@@ -3,7 +3,7 @@ import React, { Component } from "react";
 export default class Select extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { value: "coconut" };
+    this.state = { value: "Select" };
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -23,12 +23,11 @@ export default class Select extends React.Component {
     return (
       <form onSubmit={this.handleSubmit}>
         <label>
-          Pick your favorite flavor:
+          Select your choice:
           <select value={this.state.value} onChange={this.handleChange}>
-            <option value="grapefruit">Grapefruit</option>
-            <option value="lime">Lime</option>
-            <option value="coconut">Coconut</option>
-            <option value="mango">Mango</option>
+            <option value="select">select</option>
+            <option value="MultiSelect">Multi Select</option>
+            <option value="SingleSelect">Single Select</option>
           </select>
         </label>
         <input type="submit" value="Submit" />
