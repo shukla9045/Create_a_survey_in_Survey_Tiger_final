@@ -29,6 +29,7 @@ const App = () => {
           select={select}
           setSelect={handleSelect}
         />
+        <h1>{select}</h1>
         {counter === true ? (
           <Button variant="primary">Take Survey</Button>
         ) : null}
