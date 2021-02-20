@@ -9,6 +9,7 @@ import MultiSelect from "./component/CreateSurvey/multiSelect/index";
 // const handleClick = () =>{indexindex
 //     this.setState(true);
 // };
+
 const App = () => {
   const [counter, setCounter] = useState(true);
   const [select, setSelect] = useState("select");
@@ -16,7 +17,7 @@ const App = () => {
     setCounter(false);
   };
   const handleSelect = () => {
-    setSelect(select);
+    setSelect();
   };
   return (
     <div className="App">
@@ -29,7 +30,7 @@ const App = () => {
           select={select}
           setSelect={handleSelect}
         />
-        <h1>{select}</h1>
+        {/* <h1>{select}</h1> */}
         {counter === true ? (
           <Button variant="primary">Take Survey</Button>
         ) : null}

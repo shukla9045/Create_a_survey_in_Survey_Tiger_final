@@ -1,37 +1,36 @@
 import React, { Component } from "react";
+import { useState } from "react";
+const Select = ({ select, setSelect }) => {
+  const [value, setValue] = useState("Select");
+  // constructor(props) {
+  //   super(props);
+  // this.state = { value: "Select" };
 
-export default class Select extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = { value: "Select" };
+  // this.handleChange = this.handleChange.bind(this);
+  //this.handleSubmit = this.handleSubmit.bind(this);
 
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
-  }
+  const handleChange = (value) => {
+    setValue(value);
+  };
 
-  handleChange(event) {
-    this.setState({ value: event.target.value });
-  }
+  const handleSubmit = (event) => {
+    //this.props.select = event.target.value;
 
-  handleSubmit(event) {
-    this.props.select = event.target.value;
-    alert("Your favorite flavor is: " + this.state.value);
+    alert("your choice is : " + event.target.value);
     event.preventDefault();
-  }
-
-  render() {
-    return (
-      <form onSubmit={this.handleSubmit}>
-        <label>
-          Select your choice:
-          <select value={this.state.value} onChange={this.handleChange}>
-            <option value="select">select</option>
-            <option value="MultiSelect">Multi Select</option>
-            <option value="SingleSelect">Single Select</option>
-          </select>
-        </label>
-        <input type="submit" value="Submit" />
-      </form>
-    );
-  }
-}
+  };
+  return (
+    <form onSubmit={handleSubmit}>
+      <label>
+        Select your choice:
+        <select value={value} onChange={handleChange}>
+          <option value="select">select</option>
+          <option value="MultiSelect">Multi Select</option>
+          <option value="SingleSelect">Single Select</option>
+        </select>
+      </label>
+      <input type="submit" value="Submit" />
+    </form>
+  );
+};
+export default Select;
