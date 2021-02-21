@@ -37,6 +37,8 @@ const MultiSelect = () => {
   return (
     <div className="multicss">
       <h3>which of the follwing app you have in your phone?</h3>
+      <p>option</p>
+
       <form>
         {inputFields.map((inputField, index) => (
           <div key={index}>

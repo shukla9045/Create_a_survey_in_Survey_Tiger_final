@@ -1,36 +1,43 @@
-import React, { Component } from "react";
-import { useState } from "react";
-const Select = ({ select, setSelect }) => {
-  const [value, setValue] = useState("Select");
-  // constructor(props) {
-  //   super(props);
-  // this.state = { value: "Select" };
+import React, { useState } from "react";
+import Select from "react-select";
+import MultiSelect from "../multiSelect/index";
+import SingleSelect from "../singleSelect/index";
+const options = [
+  { value: "SingleSelect", label: " Single-Select" },
+  { value: "MultiSelect", label: "multi-Select" }
+];
 
-  // this.handleChange = this.handleChange.bind(this);
-  //this.handleSubmit = this.handleSubmit.bind(this);
+const MyComponent = () => {
+  const [value, setValue] = useState({
+    selectedOption: null
+  });
+  const [select, setSelect] = useState({ select: null });
+  // state = {
+  //   selectedOption: null
+  // };
 
-  const handleChange = (value) => {
-    setValue(value);
+  const handleChange = (selectedOption) => {
+    setValue({ selectedOption });
+    setSelect(selectedOption.value);
+    console.log(`Option selected:`, selectedOption.value);
   };
+  const { selectedOption } = { value };
 
-  const handleSubmit = (event) => {
-    //this.props.select = event.target.value;
-
-    alert("your choice is : " + event.target.value);
-    event.preventDefault();
-  };
   return (
-    <form onSubmit={handleSubmit}>
-      <label>
-        Select your choice:
-        <select value={value} onChange={handleChange}>
-          <option value="select">select</option>
-          <option value="MultiSelect">Multi Select</option>
-          <option value="SingleSelect">Single Select</option>
-        </select>
-      </label>
-      <input type="submit" value="Submit" />
-    </form>
+    <>
+      <Select
+        value={selectedOption}
+        placeholder={"Select Question Type"}
+        onChange={handleChange}
+        options={options}
+      />
+      {select == "MultiSelect" ? (
+        <MultiSelect />
+      ) : select == "SingleSelect" ? (
+        <SingleSelect />
+      ) : null}
+    </>
   );
 };
-export default Select;
+
+export default MyComponent;
