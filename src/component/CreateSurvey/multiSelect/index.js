@@ -1,63 +1,40 @@
 import React, { useState } from "react";
-import "./index.css";
 import { Button } from "react-bootstrap";
-import { v4 as uuidv4 } from "uuid";
-const MultiSelect = () => {
-  const [inputFields, setInputFields] = useState([{ firstName: "" }]);
-  const handleAddFields = () => {
-    setInputFields([
-      ...inputFields,
-      { id: uuidv4(), firstName: "", lastName: "" }
-    ]);
-  };
-
-  const handleRemoveFields = (id) => {
-    const values = [...inputFields];
-    values.splice(
-      values.findIndex((value) => value.id === id),
-      1
+import Form from "../Form/index";
+const MultiSelect = ({
+  collectMultidata,
+  setCollectMultiData,
+  setPublishFlag
+}) => {
+  const [addForm, setAddForm] = useState([]);
+  const [addnotify, setAddnotify] = useState(false);
+  const handleClick = (event) => {
+    setAddForm(
+      addForm.concat(
+        <Form
+          collectMultidata={collectMultidata}
+          setCollectMultiData={setCollectMultiData}
+        />
+      )
     );
-    setInputFields(values);
+    return;
   };
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log("InputFields", inputFields);
-  };
-
-  const handleChangeInput = (id, event) => {
-    const newInputFields = inputFields.map((i) => {
-      if (id === i.id) {
-        i[event.target.name] = event.target.value;
-      }
-      return i;
-    });
-
-    setInputFields(newInputFields);
+  const handlePublish = () => {
+    setPublishFlag(true);
   };
   return (
-    <div className="multicss">
-      <h3>which of the follwing app you have in your phone?</h3>
-      <p>option</p>
-
-      <form>
-        {inputFields.map((inputField, index) => (
-          <div key={index}>
-            <input
-              type="text"
-              value={inputField.firstname}
-              onChange={(event) => handleChangeInput(inputField.id, event)}
-            />
-            <Button onClick={handleAddFields}>+</Button>{" "}
-            <Button
-              disabled={inputFields.length === 1}
-              onClick={() => handleRemoveFields(inputField.id)}
-            >
-              -
-            </Button>{" "}
-          </div>
-        ))}
-        <Button onClick={handleSubmit}>Send</Button>{" "}
-      </form>
+    <div>
+      <div>
+        <Form
+          addnotify={addnotify}
+          setAddnotify={setAddnotify}
+          collectMultidata={collectMultidata}
+          setCollectMultiData={setCollectMultiData}
+        />
+        {addForm}
+      </div>
+      <Button onClick={handleClick}>Add Quesion</Button>{" "}
+      <Button onClick={handlePublish}>Publish</Button>
     </div>
   );
 };
